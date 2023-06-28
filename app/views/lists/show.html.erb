@@ -1,2 +1,19 @@
 <h1>Lists#show</h1>
 <p>Find me in app/views/lists/show.html.erb</p>
+
+<% @bookmarks.each do |bookmark| %>
+  <%= bookmark.movie.title %>
+  <%= bookmark.movie.overview %>
+  <%= image_tag bookmark.movie.poster_url, width: 150 %>
+  <%= bookmark.movie.rating %>
+  <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<% end %>
+
+<h1>Bookmarks</h1>
+<div class="container py-5">
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment %>
+    <%= f.association :movie, prompt: "Select a movie" %>
+    <%= f.submit %>
+<% end %>
+</div>

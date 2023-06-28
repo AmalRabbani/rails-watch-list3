@@ -1,2 +1,9 @@
 <h1>Lists#index</h1>
 <p>Find me in app/views/lists/index.html.erb</p>
+
+<% @lists.each do |list| %>
+  <% list.bookmarks.each do |bookmark| %>
+  <%= image_tag bookmark.movie.poster_url, width: 150%>
+  <%= link_to list.name, list_path(list) %>
+  <% end %>
+<% end %>
